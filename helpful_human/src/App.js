@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header.js'
 import Sidebar from './components/Sidebar.js'
-import ViewBody from './components/ViewBody.js'
+import ContentWrapper from './components/ContentWrapper.js'
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Sidebar/>
-        <ViewBody/>
+        <ContentWrapper/>
       </div>
     );
   }
