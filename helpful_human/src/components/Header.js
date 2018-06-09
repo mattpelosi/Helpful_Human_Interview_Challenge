@@ -1,5 +1,5 @@
 import React from "react";
-import 
+import logo from "../assets/logo-symbol.svg";
 
 class Header extends React.PureComponent {
   constructor(props) {
@@ -10,7 +10,9 @@ class Header extends React.PureComponent {
     return (
       <React.Fragment>
         <div className="header">
-          <p></p>
+          <div className="logo-container">
+            <img className="logo" src={logo} alt="logo" />
+          </div>
         </div>
       </React.Fragment>
     );

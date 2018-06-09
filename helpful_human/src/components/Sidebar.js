@@ -9,7 +9,7 @@ class Sidebar extends React.PureComponent {
     return (
       <React.Fragment>
         <div className="sidebar">
-          <p></p>
+          <button className="random-color-button">Random Color</button>
         </div>
       </React.Fragment>
     );
