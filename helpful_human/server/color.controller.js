@@ -5,7 +5,6 @@ module.exports = {
 };
 
 function colorScraper(req, res) {
-    
   colorService
     .colorScraper()
     .then(data => {

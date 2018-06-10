@@ -1,7 +1,5 @@
 const express = require('express')
 const app = express()
-const request = require("request");
-const cheerio = require("cheerio");
 const bodyParser = require('body-parser')
 const routes = require("./routes")
 
