@@ -3,9 +3,13 @@ const cheerio = require("cheerio");
 const Nightmare = require("nightmare");
 // const nightmare = Nightmare({ show: true });
 const nightmare = Nightmare();
+const mongodb = require("./mongodb");
+const conn = mongodb.connection;
+const ObjectId = mongodb.ObjectId;
 
 module.exports = {
-  colorScraper: colorScraper
+  colorScraper: colorScraper,
+  insert: insert
 };
 
 const colorNames = [
@@ -46,9 +50,17 @@ function colorScraper() {
           colorGroup[color] = colorObj;
           return colorGroup;
         }, {});
-      }, colorNames)//how can I bring additinal functions into evaluate()'s scope?
+      }, colorNames) //how can I bring additinal functions into evaluate()'s scope?
       .then(result => {
         return resolve(result);
       });
   });
+}
+
+function insert(data) {
+  return conn
+    .db()
+    .collection("colors")
+    .insert(data)
+    .then(result => result.insertedIds[0].toString());
 }

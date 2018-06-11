@@ -7,6 +7,9 @@ module.exports = {
 function colorScraper(req, res) {
   colorService
     .colorScraper()
+    .then(result => {
+      colorService.insert(result);
+    })
     .then(data => {
       res.status(200).json(data);
     })
