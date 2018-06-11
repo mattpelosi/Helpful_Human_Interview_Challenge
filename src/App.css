@@ -1,28 +1,111 @@
+@font-face {
+  font-family: "Google";
+  src: url("https://fonts.googleapis.com/css?family=Source+Serif+Pro");
+}
+
 .App {
-  text-align: center;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: 250px repeat(4, 1fr);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.header {
+  display: grid;
+  grid-template-columns: 250px 3fr 2fr;
+  background: #363c3c;
+  grid-column: 1 / -1;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #d6d8d8;
+  grid-column: 1 / 2;
+  grid-row: 2 / -1;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255);
+  grid-column: 2 / -1;
+  grid-row: 2 / -1;
   padding: 20px;
-  color: white;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-title {
-  font-size: 1.5em;
+.logo-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1;
 }
 
-.App-intro {
-  font-size: large;
+.logo {
+  position: relative;
+  right: 2em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.random-color-button {
+  position: relative;
+  top: 10px;
+  margin: 2em;
+  padding: 0;
+  height: 3em;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Google';
+  border: none;
+}
+
+.color-list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 90%;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #bfc6c6;
+}
+
+.color-swatch {
+  height: 100%;
+  width: 100%;
+  background: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.color-label {
+  display: flex;
+  position: relative;
+  left: 1em;
+  margin: 0;
+  height: 50px;
+  font-family: 'Google';
+  font-size: 20px;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+.paginator {
+  position: relative;
+  top: 1em;
+  background: black;
+  width: 200px;
+  height: 40px;
+  margin: 0;
 }
