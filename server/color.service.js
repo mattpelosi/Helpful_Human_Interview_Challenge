@@ -9,7 +9,8 @@ const ObjectId = mongodb.ObjectId;
 
 module.exports = {
   colorScraper: colorScraper,
-  insert: insert
+  insert: insert,
+  read: read
 };
 
 const colorNames = [
@@ -63,4 +64,13 @@ function insert(data) {
     .collection("colors")
     .insert(data)
     .then(result => result.insertedIds[0].toString());
+}
+
+function read() {
+  return conn
+    .db()
+    .collection("colors")
+    .find()
+    .next()
+    .then(result => result);
 }
