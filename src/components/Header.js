@@ -6,6 +6,8 @@ class Header extends React.PureComponent {
     super(props);
     this.state = {};
   }
+
+  
   render() {
     return (
       <React.Fragment>

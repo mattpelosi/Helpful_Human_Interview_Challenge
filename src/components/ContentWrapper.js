@@ -1,10 +1,21 @@
 import React from "react";
-
-class ViewBody extends React.PureComponent {
+import * as colorService from "../services/color.service.js";
+class ContentWrapper extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {``
+    colorService
+      .read()
+      .then(colors => {
+        debugger;
+        this.setState({ colors: colors });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -58,7 +69,6 @@ class ViewBody extends React.PureComponent {
               <div className="color-swatch" />
               <p className="color-label">#cfffff1</p>
             </div>
- 
           </div>
           <div className="paginator" />
         </div>
@@ -67,4 +77,4 @@ class ViewBody extends React.PureComponent {
   }
 }
 
-export default ViewBody;
+export default ContentWrapper;
