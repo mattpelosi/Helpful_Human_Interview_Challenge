@@ -4,16 +4,19 @@ class ContentWrapper extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.randomizeColors = this.randomizeColors.bind(this);
   }
 
-  componentDidMount() {``
-    colorService
-      .read()
-      .then(colors => {
-        debugger;
-        this.setState({ colors: colors });
-      })
-      .catch(err => console.log(err));
+  async componentDidMount() {
+    const colors = await colorService.read();
+    await this.setState({ colors: colors });
+    this.randomizeColors();
+  }
+
+  randomizeColors() {
+    const colorNames = Object.keys(this.state.colors);
+    debugger;
   }
 
   render() {
