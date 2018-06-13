@@ -47,18 +47,15 @@ class Paginator extends React.Component {
   }
 
   handleClick(page) {
-    debugger;
     this.goToPage(page);
   }
 
   handlePageLeft() {
-    debugger;
-    this.goToPage(this.state.currentPage - this.state.pageNeightbors * 2 - 1);
+    this.goToPage(this.state.currentPage - this.pageNeightbors * 2 - 1);
   }
 
   handlePageRight() {
-    debugger;
-    this.goToPage(this.state.currentPage - this.state.pageNeightbors * 2 + 1);
+    this.goToPage(this.state.currentPage - this.pageNeightbors * 2 + 1);
   }
 
   range(from, to, step = 1) {
@@ -119,7 +116,7 @@ class Paginator extends React.Component {
     const { currentPage } = this.state;
 
     const pages = this.getPageNumbers();
-    
+
     return (
       <React.Fragment>
         <div>
@@ -128,11 +125,7 @@ class Paginator extends React.Component {
               if (page === this.LEFT_PAGE)
                 return (
                   <li key={index} className="page-item">
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={this.handlePageLeft}
-                    >
+                    <a className="page-link" onClick={this.handlePageLeft}>
                       <span>&laquo;</span>
                     </a>
                   </li>
@@ -141,11 +134,7 @@ class Paginator extends React.Component {
               if (page === this.RIGHT_PAGE)
                 return (
                   <li key={index} className="page-item">
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={this.handlePageRight}
-                    >
+                    <a className="page-link" onClick={this.handlePageRight}>
                       <span>&raquo;</span>
                     </a>
                   </li>
