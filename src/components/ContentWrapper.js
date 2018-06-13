@@ -15,6 +15,7 @@ class ContentWrapper extends React.Component {
 
     this.generateRandomColors = this.generateRandomColors.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
+    this.shuffleColorsArray = this.shuffleColorsArray.bind(this);
   }
 
   componentDidMount() {
@@ -30,13 +31,14 @@ class ContentWrapper extends React.Component {
     const colors = JSON.parse(JSON.stringify(this.state.allColorsObj));
     delete colors._id;
 
-    const hexCodeArr = [];
+    let hexCodeArr = [];
     for (let color in colors) {
       for (let i = 0; i < colors[color].length; i++) {
         hexCodeArr.push(colors[color][i].hexCode);
       }
     }
 
+    hexCodeArr = this.shuffleColorsArray(hexCodeArr)
     this.setState({ allColorsArr: hexCodeArr });
     // for (let i = 0; i < 12; i++) {
     //   const randomColor =
@@ -47,9 +49,19 @@ class ContentWrapper extends React.Component {
     //     ];
   }
 
-  // shuffleColorsArray(arr){
+  shuffleColorsArray(arr){
+    //Fisher-Yates shuffle
+    let m = arr.length, t, i
 
-  // }
+    while(m){
+      i = Math.floor(Math.random() * m--)
+      t = arr[m];
+      arr[m] = arr[i];
+      arr[i] = t
+    }
+
+    return arr
+  }
 
   onPageChange(data) {
     const offset = (data.currentPage - 1) * data.pageLimit;
