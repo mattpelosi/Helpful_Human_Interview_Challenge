@@ -34,7 +34,7 @@ class ContentWrapper extends React.Component {
         hexCodeArr.push(colors[color][i].hexCode);
       }
     }
-
+    
     this.setState({ allColorsArr: hexCodeArr });
     // for (let i = 0; i < 12; i++) {
     //   const randomColor =
@@ -55,17 +55,17 @@ class ContentWrapper extends React.Component {
       offset,
       offset + data.pageLimit
     );
-
+    
     this.setState({
       currentPage: data.currentPage,
       currentColors: currentColors,
       totalPages: data.totalPages
     });
   }
-
+  
   render() {
     if (this.state.allColorsArr.length === 0) return null;
-    // debugger;
+    
     return (
       <React.Fragment>
         <div className="content-wrapper">
