@@ -6,7 +6,8 @@ class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allColors: [],
+      allColorsArr: [],
+      allColorsObj: {},
       currentColors: [],
       currentPage: null,
       totalPages: null
@@ -18,14 +19,14 @@ class ContentWrapper extends React.Component {
 
   async componentDidMount() {
     const colors = await colorService.read();
-    await this.setState({ allColors: colors });
+    await this.setState({ allColorsObj: colors });
     this.generateRandomColors();
   }
 
   generateRandomColors() {
     const randomColors = [];
-    const colors = JSON.parse(JSON.stringify(this.state.allColors));
-    delete colors._id
+    const colors = JSON.parse(JSON.stringify(this.state.allColorsObj));
+    delete colors._id;
 
     const hexCodeArr = [];
     for (let color in colors) {
@@ -34,6 +35,7 @@ class ContentWrapper extends React.Component {
       }
     }
 
+    this.setState({ allColorsArr: hexCodeArr });
     // for (let i = 0; i < 12; i++) {
     //   const randomColor =
     //     colorNames[Math.floor(Math.random() * colorNames.length)];
@@ -41,9 +43,6 @@ class ContentWrapper extends React.Component {
     //     colors[randomColor][
     //       Math.floor(Math.random() * colors[randomColor].length)
     //     ];
-
-
-    this.setState({ currentColors: hexCodeArr });
   }
 
   // shuffleColorsArray(arr){
@@ -51,37 +50,33 @@ class ContentWrapper extends React.Component {
   // }
 
   onPageChange(data) {
-    // const offset = (data.currentPage - 1) * data.pageLimit;
-    // debugger;
-    // const currentColors = this.state.allColors.slice(
-    //   offset,
-    //   offset + data.pageLimit
-    // );
-    // this.setState({
-    //   currentPage: data.currentPage,
-    //   currentColors: data.currentColors,
-    //   totalPages: data.totalPages
-    // });
+    const offset = (data.currentPage - 1) * data.pageLimit;
+    const currentColors = this.state.allColorsArr.slice(
+      offset,
+      offset + data.pageLimit
+    );
+
+    this.setState({
+      currentPage: data.currentPage,
+      currentColors: currentColors,
+      totalPages: data.totalPages
+    });
   }
 
   render() {
-    //prevent react from attempting to render undefined variables in state
-    if (
-      this.state.allColors === undefined ||
-      this.state.currentColors === undefined
-    )
-      return null;
-
-    const swatches = this.state.currentColors.map(color => (
-      <ColorSwatch text={color} background={color} />
-    ));
-
+    if (this.state.allColorsArr.length === 0) return null;
+    // debugger;
     return (
       <React.Fragment>
         <div className="content-wrapper">
-          <div className="color-list">{swatches}</div>
+          <div className="color-list">
+            {this.state.currentColors.map(color => (
+              <ColorSwatch text={color} background={color} />
+            ))}
+          </div>
+
           <Paginator
-            totalColors={this.state.allColors}
+            totalColors={this.state.allColorsArr.length}
             pageLimit={12}
             pageNeighbors={1}
             onPageChange={this.onPageChange}
