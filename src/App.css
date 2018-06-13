@@ -57,7 +57,7 @@
   border-radius: 12px;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'Google';
+  font-family: "Google";
   border: none;
 }
 
@@ -94,18 +94,36 @@
   left: 1em;
   margin: 0;
   height: 50px;
-  font-family: 'Google';
+  font-family: "Google";
   font-size: 20px;
   align-items: center;
   justify-content: flex-start;
-
 }
 
 .paginator {
   position: relative;
   top: 1em;
-  background: black;
+  background: rgb(164, 145, 145);
   width: 200px;
   height: 40px;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.page-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  border-right: 1px solid black;
+}
+.page-item:last-child {
+  border-right: none;
 }
