@@ -103,7 +103,7 @@
 .paginator {
   position: relative;
   top: 1em;
-  background: rgb(164, 145, 145);
+  background: rgb(255, 255, 255);
   width: 200px;
   height: 40px;
   margin: 0;
@@ -112,18 +112,24 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .page-item {
-
   list-style: none;
   height: 100%;
   width: 100%;
-  border-right: 1px solid black;
+  /* border-right: 1px solid black; */
 }
+
 .page-item:last-child {
   border-right: none;
+}
+
+.page-item.active {
+  opacity: 1;
+  /* background: rgb(192, 183, 183); */
+  text-decoration: underline;
 }
 
 .page-link {

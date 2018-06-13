@@ -5,13 +5,13 @@ class Paginator extends React.Component {
     super(props);
     this.state = { currentPage: 1 };
 
-    const { totalColors = null, pageLimit = 30, pageNeightbors = 0 } = props;
+    const { totalColors = null, pageLimit = 30, pageNeighbors = 0 } = props;
 
     this.pageLimit = typeof pageLimit === "number" ? pageLimit : 30;
     this.totalColors = typeof totalColors === "number" ? totalColors : 0;
-    this.pageNeightbors =
-      typeof pageNeightbors === "number"
-        ? Math.max(0, Math.min(pageNeightbors, 2))
+    this.pageNeighbors =
+      typeof pageNeighbors === "number"
+        ? Math.max(0, Math.min(pageNeighbors, 2))
         : 0;
     this.totalPages = Math.ceil(this.totalColors / this.pageLimit);
 
@@ -51,11 +51,11 @@ class Paginator extends React.Component {
   }
 
   handlePageLeft() {
-    this.goToPage(this.state.currentPage - this.pageNeightbors * 2 - 1);
+    this.goToPage(this.state.currentPage - this.pageNeighbors * 2 - 1);
   }
 
   handlePageRight() {
-    this.goToPage(this.state.currentPage - this.pageNeightbors * 2 + 1);
+    this.goToPage(this.state.currentPage + this.pageNeighbors * 2 + 1);
   }
 
   range(from, to, step = 1) {
@@ -71,14 +71,14 @@ class Paginator extends React.Component {
   getPageNumbers() {
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
-    const pageNeightbors = this.pageNeightbors;
+    const pageNeighbors = this.pageNeighbors;
 
-    const totalNumbers = this.pageNeightbors * 2 + 3;
+    const totalNumbers = this.pageNeighbors * 2 + 3;
     const totalBlocks = totalNumbers + 2;
 
     if (totalPages > totalBlocks) {
-      const startPage = Math.max(2, currentPage - pageNeightbors);
-      const endPage = Math.min(totalPages - 1, currentPage + pageNeightbors);
+      const startPage = Math.max(2, currentPage - pageNeighbors);
+      const endPage = Math.min(totalPages - 1, currentPage + pageNeighbors);
 
       let pages = this.range(startPage, endPage);
 
@@ -141,7 +141,10 @@ class Paginator extends React.Component {
                 );
 
               return (
-                <li key={index} className={`page-item`}>
+                <li
+                  key={index}
+                  className={`page-item${currentPage === page ? " active" : ""}`}
+                >
                   <a
                     className="page-link"
                     onClick={() => this.handleClick(page)}
