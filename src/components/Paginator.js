@@ -40,7 +40,6 @@ class Paginator extends React.Component {
       totalPages: this.totalPages,
       pageLimit: this.pageLimit
     };
-    debugger;
     this.setState(
       { currentPage: currentPage },
       this.props.onPageChange(paginatorData)
@@ -120,7 +119,7 @@ class Paginator extends React.Component {
     const { currentPage } = this.state;
 
     const pages = this.getPageNumbers();
-    debugger;
+    
     return (
       <React.Fragment>
         <div>
@@ -133,8 +132,9 @@ class Paginator extends React.Component {
                       className="page-link"
                       href="#"
                       onClick={this.handlePageLeft}
-                    />
-                    <span>&laquo;</span>
+                    >
+                      <span>&laquo;</span>
+                    </a>
                   </li>
                 );
 
@@ -145,8 +145,9 @@ class Paginator extends React.Component {
                       className="page-link"
                       href="#"
                       onClick={this.handlePageRight}
-                    />
-                    <span>&raquo;</span>
+                    >
+                      <span>&raquo;</span>
+                    </a>
                   </li>
                 );
 
@@ -155,8 +156,9 @@ class Paginator extends React.Component {
                   <a
                     className="page-link"
                     onClick={() => this.handleClick(page)}
-                  />
-                  {page}
+                  >
+                    {page}
+                  </a>
                 </li>
               );
             })}
