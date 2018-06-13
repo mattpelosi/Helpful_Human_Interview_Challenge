@@ -20,7 +20,12 @@ class Paginator extends React.Component {
 
     this.goToPage = this.goToPage.bind(this);
     this.range = this.range.bind(this);
+
     this.getPageNumbers = this.getPageNumbers.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handlePageRight = this.handlePageRight.bind(this);
+    this.handlePageLeft = this.handlePageLeft.bind(this);
   }
 
   componentDidMount() {
@@ -35,27 +40,27 @@ class Paginator extends React.Component {
       totalPages: this.totalPages,
       pageLimit: this.pageLimit
     };
-
+    debugger;
     this.setState(
       { currentPage: currentPage },
       this.props.onPageChange(paginatorData)
     );
   }
 
-  handleClick = page => {
+  handleClick(page) {
     debugger;
     this.goToPage(page);
-  };
+  }
 
-  handlePageLeft = page => {
+  handlePageLeft() {
     debugger;
     this.goToPage(this.state.currentPage - this.state.pageNeightbors * 2 - 1);
-  };
+  }
 
-  handlePageRight = page => {
+  handlePageRight() {
     debugger;
     this.goToPage(this.state.currentPage - this.state.pageNeightbors * 2 + 1);
-  };
+  }
 
   range(from, to, step = 1) {
     let i = from;
@@ -115,7 +120,7 @@ class Paginator extends React.Component {
     const { currentPage } = this.state;
 
     const pages = this.getPageNumbers();
-
+    debugger;
     return (
       <React.Fragment>
         <div>
@@ -149,8 +154,7 @@ class Paginator extends React.Component {
                 <li key={index} className={`page-item`}>
                   <a
                     className="page-link"
-                    href="#"
-                    onClick={this.handleClick}
+                    onClick={() => this.handleClick(page)}
                   />
                   {page}
                 </li>
