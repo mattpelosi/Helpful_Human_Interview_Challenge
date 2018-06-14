@@ -41,7 +41,7 @@ class ContentWrapper extends React.Component {
     let hexCodeArr = [];
     for (let color in colors) {
       for (let i = 0; i < colors[color].length; i++) {
-        hexCodeArr.push(colors[color][i].hexCode);
+        hexCodeArr.push(colors[color][i]);
       }
     }
 
@@ -119,7 +119,6 @@ class ContentWrapper extends React.Component {
 
   render() {
     if (this.state.allColorsArr.length === 0) return null;
-
     return (
       <React.Fragment>
         <div className="content-wrapper">
@@ -129,8 +128,7 @@ class ContentWrapper extends React.Component {
                 {this.state.currentColors.map((color, index) => (
                   <ColorSwatch
                     key={index}
-                    text={color}
-                    background={color}
+                    colorData={color}
                     detailView={this.selectDetailView}
                   />
                 ))}
