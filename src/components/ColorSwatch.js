@@ -1,25 +1,35 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
-function ColorSwatch(props) {
-  return (
-    <div
-      className={`swatch-container${props.isSelected ? " selected" : ""}`}
-      onClick={() => {
-        props.detailView(props.colorData.hexCode);
-      }}
-    >
+class ColorSwatch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
       <div
-        className="color-swatch"
-        style={{ background: props.colorData.hexCode }}
-      />
-      <div className="color-data">
-        <p className="color-label">{props.colorData.hexCode}</p>
-        {props.showLightness && (
-          <p className="color-lightness">{props.colorData.lightness}</p>
-        )}
+        className={`swatch-container${
+          this.props.isSelected ? " selected" : ""
+        }`}
+        onClick={() => {
+          this.props.detailView(this.props.colorData.hexCode);
+        }}
+      >
+        <div
+          className="color-swatch"
+          style={{ background: this.props.colorData.hexCode }}
+        />
+        <div className="color-data">
+          <p className="color-label">{this.props.colorData.hexCode}</p>
+          {this.props.showLightness && (
+            <p className="color-lightness">{this.props.colorData.lightness}</p>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default ColorSwatch;
