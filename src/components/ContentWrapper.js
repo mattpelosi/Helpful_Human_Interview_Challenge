@@ -2,6 +2,7 @@ import React from "react";
 import * as colorService from "../services/color.service.js";
 import ColorSwatch from "./ColorSwatch";
 import Paginator from "./Paginator";
+import DetailView from "./DetailView";
 class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -10,12 +11,16 @@ class ContentWrapper extends React.Component {
       allColorsObj: {},
       currentColors: [],
       currentPage: null,
-      totalPages: null
+      totalPages: null,
+      detailView: false,
+      detailColor: ""
     };
 
     this.generateRandomColors = this.generateRandomColors.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.shuffleColorsArray = this.shuffleColorsArray.bind(this);
+    this.selectDetailView = this.selectDetailView.bind(this);
+    this.clearDetailView = this.clearDetailView.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +43,7 @@ class ContentWrapper extends React.Component {
       }
     }
 
-    hexCodeArr = this.shuffleColorsArray(hexCodeArr)
+    hexCodeArr = this.shuffleColorsArray(hexCodeArr);
     this.setState({ allColorsArr: hexCodeArr });
     // for (let i = 0; i < 12; i++) {
     //   const randomColor =
@@ -49,18 +54,20 @@ class ContentWrapper extends React.Component {
     //     ];
   }
 
-  shuffleColorsArray(arr){
+  shuffleColorsArray(arr) {
     //Fisher-Yates shuffle
-    let m = arr.length, t, i
+    let m = arr.length,
+      t,
+      i;
 
-    while(m){
-      i = Math.floor(Math.random() * m--)
+    while (m) {
+      i = Math.floor(Math.random() * m--);
       t = arr[m];
       arr[m] = arr[i];
-      arr[i] = t
+      arr[i] = t;
     }
 
-    return arr
+    return arr;
   }
 
   onPageChange(data) {
@@ -77,24 +84,51 @@ class ContentWrapper extends React.Component {
     });
   }
 
+  selectDetailView(color) {
+    this.setState({
+      detailView: true,
+      detailColor: color
+    });
+  }
+
+  clearDetailView() {
+    this.setState({
+      detailView: false,
+      detailColor: ""
+    });
+  }
+
   render() {
     if (this.state.allColorsArr.length === 0) return null;
 
     return (
       <React.Fragment>
         <div className="content-wrapper">
-          <div className="color-list">
-            {this.state.currentColors.map(color => (
-              <ColorSwatch text={color} background={color} />
-            ))}
-          </div>
-
-          <Paginator
-            totalColors={this.state.allColorsArr.length}
-            pageLimit={12}
-            pageNeighbors={1}
-            onPageChange={this.onPageChange}
-          />
+          {!this.state.detailView ? (
+            <React.Fragment>
+              <div className="color-list">
+                {this.state.currentColors.map((color, index) => (
+                  <ColorSwatch
+                    key={index}
+                    text={color}
+                    background={color}
+                    detailView={this.selectDetailView}
+                  />
+                ))}
+              </div>
+              <Paginator
+                totalColors={this.state.allColorsArr.length}
+                pageLimit={12}
+                pageNeighbors={1}
+                onPageChange={this.onPageChange}
+              />
+            </React.Fragment>
+          ) : (
+            <DetailView
+              detailColor={this.state.detailColor}
+              clearDetailView={this.clearDetailView}
+            />
+          )}
         </div>
       </React.Fragment>
     );
