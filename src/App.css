@@ -46,6 +46,7 @@
 .logo {
   position: relative;
   right: 2em;
+  height: 40px;
 }
 
 .random-color-button {
@@ -83,7 +84,7 @@
 }
 
 .swatch-container.selected {
-  border: 1px solid rgb(117, 107, 107);
+  border: 2px solid rgb(117, 107, 107);
 }
 
 .color-swatch {
