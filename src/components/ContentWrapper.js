@@ -13,7 +13,8 @@ class ContentWrapper extends React.Component {
       currentPage: null,
       totalPages: null,
       detailView: false,
-      detailColor: ""
+      detailColor: "",
+      detailList: []
     };
 
     this.generateRandomColors = this.generateRandomColors.bind(this);
@@ -21,6 +22,7 @@ class ContentWrapper extends React.Component {
     this.shuffleColorsArray = this.shuffleColorsArray.bind(this);
     this.selectDetailView = this.selectDetailView.bind(this);
     this.clearDetailView = this.clearDetailView.bind(this);
+    this.returnColorGroup = this.returnColorGroup.bind(this);
   }
 
   componentDidMount() {
@@ -84,10 +86,27 @@ class ContentWrapper extends React.Component {
     });
   }
 
+  returnColorGroup(color) {
+    const obj = this.state.allColorsObj;
+    let group = {};
+    for (let prop in obj) {
+      for (let i = 0; i < obj[prop].length; i++) {
+        if (obj[prop][i].hexCode === color) {
+          group = obj[prop];
+          break;
+        }
+      }
+    }
+    return group;
+  }
+
   selectDetailView(color) {
+    const detailList = this.returnColorGroup(color);
+    
     this.setState({
       detailView: true,
-      detailColor: color
+      detailColor: color,
+      detailList: detailList
     });
   }
 
@@ -127,6 +146,8 @@ class ContentWrapper extends React.Component {
             <DetailView
               detailColor={this.state.detailColor}
               clearDetailView={this.clearDetailView}
+              detailList={this.state.detailList}
+              detailView={this.selectDetailView}
             />
           )}
         </div>

@@ -7,6 +7,7 @@ class DetailView extends React.Component {
     this.state = {};
   }
   render() {
+    // debugger;
     return (
       <div className="detail-view">
         <div className="detail-focus">
@@ -17,11 +18,14 @@ class DetailView extends React.Component {
           <p className="detail-color-label">{this.props.detailColor}</p>
         </div>
         <div className="detail-color-options">
-          <ColorSwatch />
-          <ColorSwatch />
-          <ColorSwatch />
-          <ColorSwatch />
-          <ColorSwatch />
+          {this.props.detailList.map((color, index) => (
+            <ColorSwatch
+              key={index}
+              text={color.hexCode}
+              background={color.hexCode}
+              DetailView={this.props.detailView}
+            />
+          ))}
         </div>
         <button
           className="clear-color-button"
