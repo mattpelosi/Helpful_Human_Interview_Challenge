@@ -7,15 +7,18 @@ class Header extends React.PureComponent {
     this.state = {};
   }
 
-  
   render() {
     return (
       <React.Fragment>
         <div className="header">
           <div className="logo-container">
-            <img className="logo" src={logo} alt="logo" />
+            <a href="http://www.helpfulhuman.com/">
+              <img className="logo" src={logo} alt="logo" />
+            </a>
           </div>
         </div>
+
+        
       </React.Fragment>
     );
   }
