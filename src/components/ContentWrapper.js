@@ -3,6 +3,8 @@ import * as colorService from "../services/color.service.js";
 import ColorSwatch from "./ColorSwatch";
 import Paginator from "./Paginator";
 import DetailView from "./DetailView";
+import { connect } from "react-redux";
+import { addColorIndex } from "../store/color.actions";
 class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -23,37 +25,39 @@ class ContentWrapper extends React.Component {
     this.selectDetailView = this.selectDetailView.bind(this);
     this.clearDetailView = this.clearDetailView.bind(this);
     this.returnColorGroup = this.returnColorGroup.bind(this);
+    this.ArrayFromObj = this.ArrayFromObj.bind(this);
   }
 
-  componentDidMount() {
-    colorService.read().then(colors => {
-      this.setState({ allColorsObj: colors }, () =>
-        this.generateRandomColors()
-      );
-    });
+  async componentDidMount() {
+    const colors = await colorService.read();
+    await this.setState({ allColorsObj: colors }, () =>
+      this.generateRandomColors()
+    );
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.props.randomColor !== prevState.randomColor) {
+      this.selectDetailView(this.props.randomColor.hexCode);
+    }
   }
 
   generateRandomColors() {
-    const randomColors = [];
     const colors = JSON.parse(JSON.stringify(this.state.allColorsObj));
     delete colors._id;
-
-    let hexCodeArr = [];
-    for (let color in colors) {
-      for (let i = 0; i < colors[color].length; i++) {
-        hexCodeArr.push(colors[color][i]);
-      }
-    }
-
+    let hexCodeArr = this.ArrayFromObj(colors);
     hexCodeArr = this.shuffleColorsArray(hexCodeArr);
     this.setState({ allColorsArr: hexCodeArr });
-    // for (let i = 0; i < 12; i++) {
-    //   const randomColor =
-    //     colorNames[Math.floor(Math.random() * colorNames.length)];
-    //   const randomIndex =
-    //     colors[randomColor][
-    //       Math.floor(Math.random() * colors[randomColor].length)
-    //     ];
+    this.props.addColorIndex(hexCodeArr);
+  }
+
+  ArrayFromObj(obj) {
+    let arr = [];
+    for (let color in obj) {
+      for (let i = 0; i < obj[color].length; i++) {
+        arr.push(obj[color][i]);
+      }
+    }
+    return arr;
   }
 
   shuffleColorsArray(arr) {
@@ -102,7 +106,7 @@ class ContentWrapper extends React.Component {
 
   selectDetailView(color) {
     const detailList = this.returnColorGroup(color);
-    
+
     this.setState({
       detailView: true,
       detailColor: color,
@@ -154,4 +158,17 @@ class ContentWrapper extends React.Component {
   }
 }
 
-export default ContentWrapper;
+const mapStateToProps = state => ({
+  randomColor: state.randomColor
+});
+
+const mapDispatchToProps = dispatch => ({
+  addColorIndex: colorIndex => {
+    dispatch(addColorIndex(colorIndex));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContentWrapper);

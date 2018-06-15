@@ -6,16 +6,20 @@ class DetailView extends React.Component {
     super(props);
     this.state = {};
 
-    this.scrollToSelectedItem = this.scrollToSelectedItem.bind(this)
+    this.scrollToSelectedItem = this.scrollToSelectedItem.bind(this);
   }
 
   componentDidMount() {
     this.scrollToSelectedItem();
   }
 
+  componentDidUpdate() {
+    this.scrollToSelectedItem();
+  }
+
   scrollToSelectedItem() {
     const el = document.getElementsByClassName("selected");
-    el[0].scrollIntoView({block: 'center'});
+    el[0].scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
   render() {
