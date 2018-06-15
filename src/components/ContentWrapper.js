@@ -4,8 +4,8 @@ import ColorSwatch from "./ColorSwatch";
 import Paginator from "./Paginator";
 import DetailView from "./DetailView";
 import { connect } from "react-redux";
-import { addColorIndex } from "../store/color.actions";
-import "../css/content.wrapper.css"
+import { addColorIndex, addColorGroupsObj } from "../store/color.actions";
+import "../css/content.wrapper.css";
 class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +34,7 @@ class ContentWrapper extends React.Component {
     await this.setState({ allColorsObj: colors }, () =>
       this.generateRandomColors()
     );
+    this.props.addColorGroups(colors);
   }
 
   componentDidUpdate(prevState) {
@@ -166,6 +167,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addColorIndex: colorIndex => {
     dispatch(addColorIndex(colorIndex));
+  },
+  addColorGroups: colorGroups => {
+    dispatch(addColorGroupsObj(colorGroups));
   }
 });
 
