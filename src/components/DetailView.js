@@ -1,5 +1,6 @@
 import React from "react";
 import ColorSwatch from "./ColorSwatch";
+import '../css/detail.view.css'
 
 class DetailView extends React.Component {
   constructor(props) {

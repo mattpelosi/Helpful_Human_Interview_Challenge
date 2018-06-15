@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { selectRandomColor } from "../store/color.actions";
+import '../css/sidebar.css'
 
 class Sidebar extends React.PureComponent {
   constructor(props) {
