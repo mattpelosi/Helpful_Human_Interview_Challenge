@@ -10,6 +10,16 @@ export function read() {
     .catch(responseErrorHandler);
 }
 
+export function colorScraper() {
+  const config = {
+    method: "GET",
+    headers: {}
+  };
+  return axiosInstance(`http://localhost:8080/scrape-colors`, config)
+    .then(responseSuccessHandler)
+    .catch(responseErrorHandler);
+}
+
 const responseSuccessHandler = response => {
   return response.data;
 };
