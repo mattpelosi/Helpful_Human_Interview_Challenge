@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/color.swatch.css"
 
 class ColorSwatch extends React.Component {
   constructor(props) {

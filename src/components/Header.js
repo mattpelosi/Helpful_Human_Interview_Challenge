@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/logo-symbol.svg";
+import '../css/header.css'
 
 class Header extends React.PureComponent {
   constructor(props) {

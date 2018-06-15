@@ -5,6 +5,7 @@ import Paginator from "./Paginator";
 import DetailView from "./DetailView";
 import { connect } from "react-redux";
 import { addColorIndex } from "../store/color.actions";
+import "../css/content.wrapper.css"
 class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
