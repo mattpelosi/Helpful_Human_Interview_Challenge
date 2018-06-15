@@ -30,14 +30,14 @@ function colorScraper() {
     nightmare
       .goto(url)
       .evaluate(function(colorNames) {
-        //--------------- Function 1 ----------------------
+        //--------------- Select and Store ----------------------
         return colorNames.reduce(function(colorGroup, color) {
           document.getElementById("entercolorDIV").children[0].value = color;
           document.getElementById("entercolorDIV").children[1].click();
           const colorTable = document.querySelector("#lumtopcontainer tbody")
             .children;
           colorArr = Array.from(colorTable);
-          //-------------- Function 2 ----------------
+          //-------------- Reduce Color Table to object  ----------------
           const colorObj = colorArr.reduce(function(list, shade) {
             if (shade.firstChild.innerText !== "") {
               list.push({
@@ -51,7 +51,7 @@ function colorScraper() {
           colorGroup[color] = colorObj;
           return colorGroup;
         }, {});
-      }, colorNames) //how can I bring additinal functions into evaluate()'s scope?
+      }, colorNames) 
       .then(result => {
         return resolve(result);
       });

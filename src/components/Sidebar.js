@@ -47,6 +47,7 @@ class Sidebar extends React.PureComponent {
           <button
             className="random-color-button"
             onClick={this.selectRandomColor}
+            disabled={!this.props.colorIndex}
           >
             Random Color
           </button>

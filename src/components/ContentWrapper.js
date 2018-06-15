@@ -6,6 +6,8 @@ import DetailView from "./DetailView";
 import { connect } from "react-redux";
 import { addColorIndex, addColorGroupsObj } from "../store/color.actions";
 import "../css/content.wrapper.css";
+import Spinner from "react-spinkit";
+
 class ContentWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,8 @@ class ContentWrapper extends React.Component {
       totalPages: null,
       detailView: false,
       detailColor: "",
-      detailList: []
+      detailList: [],
+      loading: true
     };
 
     this.generateRandomColors = this.generateRandomColors.bind(this);
@@ -31,8 +34,12 @@ class ContentWrapper extends React.Component {
 
   async componentDidMount() {
     const colors = await colorService.colorScraper();
-    await this.setState({ allColorsObj: colors }, () =>
-      this.generateRandomColors()
+    await this.setState(
+      {
+        allColorsObj: colors,
+        loading: false
+      },
+      () => this.generateRandomColors()
     );
     this.props.addColorGroups(colors);
   }
@@ -127,34 +134,44 @@ class ContentWrapper extends React.Component {
     if (this.state.allColorsArr.length === 0) return null;
     return (
       <React.Fragment>
-        <div className="content-wrapper">
-          {!this.state.detailView ? (
-            <React.Fragment>
-              <div className="color-list">
-                {this.state.currentColors.map((color, index) => (
-                  <ColorSwatch
-                    key={index}
-                    colorData={color}
-                    detailView={this.selectDetailView}
+        {this.state.loading ? (
+          <React.Fragment>
+            <div className="loading">
+              <Spinner name="three-bounce" color="steelblue" />
+            </div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="content-wrapper">
+              {!this.state.detailView ? (
+                <React.Fragment>
+                  <div className="color-list">
+                    {this.state.currentColors.map((color, index) => (
+                      <ColorSwatch
+                        key={index}
+                        colorData={color}
+                        detailView={this.selectDetailView}
+                      />
+                    ))}
+                  </div>
+                  <Paginator
+                    totalColors={this.state.allColorsArr.length}
+                    pageLimit={12}
+                    pageNeighbors={1}
+                    onPageChange={this.onPageChange}
                   />
-                ))}
-              </div>
-              <Paginator
-                totalColors={this.state.allColorsArr.length}
-                pageLimit={12}
-                pageNeighbors={1}
-                onPageChange={this.onPageChange}
-              />
-            </React.Fragment>
-          ) : (
-            <DetailView
-              detailColor={this.state.detailColor}
-              clearDetailView={this.clearDetailView}
-              detailList={this.state.detailList}
-              detailView={this.selectDetailView}
-            />
-          )}
-        </div>
+                </React.Fragment>
+              ) : (
+                <DetailView
+                  detailColor={this.state.detailColor}
+                  clearDetailView={this.clearDetailView}
+                  detailList={this.state.detailList}
+                  detailView={this.selectDetailView}
+                />
+              )}
+            </div>
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }
