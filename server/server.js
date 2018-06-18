@@ -5,7 +5,7 @@ const routes = require("./routes");
 const mongo = require("./mongodb");
 const dotenv = require("dotenv");
 
-dotenv.config({path:`/sf.code/interview-challenge/helpful_human/.env`});
+dotenv.config({path:`/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/.env`});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
