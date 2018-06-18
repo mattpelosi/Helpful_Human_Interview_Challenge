@@ -33,7 +33,7 @@ class ContentWrapper extends React.Component {
   }
 
   async componentDidMount() {
-    const colors = await colorService.colorScraper();
+    const colors = await colorService.read();
     await this.setState(
       {
         allColorsObj: colors,
