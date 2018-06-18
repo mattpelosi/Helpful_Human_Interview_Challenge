@@ -4,13 +4,13 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const mongo = require("./mongodb");
 const dotenv = require("dotenv");
-const https = require("https");
-const fs = require("fs");
+// const https = require("https");
+// const fs = require("fs");
 
-const httpsOptions = {
-  key: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/MyKey.key"),
-  cert: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/MyCertificate.crt")
-};
+// const httpsOptions = {
+//   key: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/MyKey.key"),
+//   cert: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/MyCertificate.crt")
+// };
 
 dotenv.config({path:`/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/.env`});
 
@@ -33,8 +33,8 @@ app.use(routes);
 
 mongo
   .connect(process.env.MONGODB_URL)
-  .then(https.createServer(httpsOptions, app).listen(8080))
-  // .then(app.listen(8080))
+  // .then(https.createServer(httpsOptions, app).listen(8080))
+  .then(app.listen(8080))
   .catch(err => {
     console.error(err);
     process.exit(1);

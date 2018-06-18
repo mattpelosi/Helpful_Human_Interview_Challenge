@@ -5,7 +5,7 @@ export function read() {
     method: "GET",
     headers: {}
   };
-  return axiosInstance(`https://localhost:8080/colors`, config)
+  return axiosInstance(`/colors`, config)
     .then(responseSuccessHandler)
     .catch(responseErrorHandler);
 }
@@ -15,7 +15,7 @@ export function colorScraper() {
     method: "GET",
     headers: {}
   };
-  return axiosInstance(`https://localhost:8080/scrape-colors`, config)
+  return axiosInstance(`/scrape-colors`, config)
     .then(responseSuccessHandler)
     .catch(responseErrorHandler);
 }
