@@ -4,6 +4,13 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const mongo = require("./mongodb");
 const dotenv = require("dotenv");
+// const https = require("https");
+// const fs = require("fs");
+
+// const httpsOptions = {
+//   key: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/server.key"),
+//   cert: fs.readFileSync("/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/server/ssl/server.crt")
+// };
 
 dotenv.config({path:`/sf.code/helpful-human-new-clone/Helpful_Human_Interview_Challenge/.env`});
 
