@@ -40,4 +40,4 @@ mongo
     process.exit(1);
   });
 
-console.log("server listening on port 80");
+console.log("server listening on port 8080");
