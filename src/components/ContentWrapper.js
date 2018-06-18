@@ -131,13 +131,14 @@ class ContentWrapper extends React.Component {
   }
 
   render() {
-    if (this.state.allColorsArr.length === 0) return null;
+    
     return (
       <React.Fragment>
-        {this.state.loading ? (
+        {this.state.loading || this.state.allColorsArr.length === 0 ? (
           <React.Fragment>
             <div className="loading">
-              <Spinner name="three-bounce" color="steelblue" />
+              <h3>Loading</h3>
+              <Spinner name="three-bounce" color="black" />
             </div>
           </React.Fragment>
         ) : (
