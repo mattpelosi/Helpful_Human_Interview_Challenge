@@ -5,7 +5,7 @@ export function read() {
     method: "GET",
     headers: {}
   };
-  return axiosInstance(`https://hh-interview-challenge-mp.herokuapp.com/colors`, config)
+  return axiosInstance(`http://localhost:8080/colors`, config)
     .then(responseSuccessHandler)
     .catch(responseErrorHandler);
 }
@@ -15,7 +15,8 @@ export function colorScraper() {
     method: "GET",
     headers: {}
   };
-  return axiosInstance(`https://hh-interview-challenge-mp.herokuapp.com/scrape-colors`, config)
+
+  return axiosInstance(`http://localhost:8080/scrape-colors`, config)
     .then(responseSuccessHandler)
     .catch(responseErrorHandler);
 }
