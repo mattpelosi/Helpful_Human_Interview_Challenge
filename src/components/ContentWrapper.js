@@ -34,6 +34,7 @@ class ContentWrapper extends React.Component {
 
   async componentDidMount() {
     const colors = await colorService.read();
+    delete colors._id;
     await this.setState(
       {
         allColorsObj: colors,
@@ -52,7 +53,7 @@ class ContentWrapper extends React.Component {
 
   generateRandomColors() {
     const colors = JSON.parse(JSON.stringify(this.state.allColorsObj));
-    delete colors._id;
+    // delete colors._id;
     let hexCodeArr = this.ArrayFromObj(colors);
     hexCodeArr = this.shuffleColorsArray(hexCodeArr);
     this.setState({ allColorsArr: hexCodeArr });
